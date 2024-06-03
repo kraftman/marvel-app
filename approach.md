@@ -2,7 +2,7 @@
 
 2 Lock it down - prettier, typescript, eslint, husky, lint-staged :white_check_mark:
 
-3 Test it - jest, react-testing-library, storybook
+3 Test it - jest, react-testing-library, storybook :white_check_mark:
 
 4 Document it - storybook, mdx
 
