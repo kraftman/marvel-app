@@ -21,3 +21,21 @@ export async function getCharacters() {
     return {};
   }
 }
+
+export async function getCharacterById(id: string) {
+  try {
+    const ts = new Date().getTime();
+
+    const hash = md5(ts + privateKey + publicKey);
+    let queryParams = `ts=${ts}&apikey=${publicKey}&hash=${hash}`;
+
+    const url = `https://gateway.marvel.com/v1/public/characters/${id}?${queryParams}`;
+    const response = await fetch(url);
+    const data = await response.json();
+
+    return data.data.results.length > 0 ? data.data.results[0] : {};
+  } catch (error) {
+    console.log(error);
+    return {};
+  }
+}

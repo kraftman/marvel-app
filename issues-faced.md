@@ -1,1 +1,6 @@
-- nextjs changed the way they handle api routes in 14, needed to learn server components/actions
+- nextjs 14 changed the way they handle api routes in 14, needed to learn server components/actions
+- nextjs changed they way they handle dynamic routes, from myPage/[id].tsx to myPage/[id]/page.tsx
+
+time taken:
+project setup, basic components and API calls running, ~ 40 mins
+learning server components and actions, ~ 15 mins
