@@ -1,22 +1,28 @@
-
-import md5 from 'md5';
+import md5 from "md5";
+import type { NextApiRequest, NextApiResponse } from "next";
 const publicKey = process.env.NEXT_PUBLIC_MARVEL_PUBLIC_KEY!;
 const privateKey = process.env.NEXT_PUBLIC_MARVEL_PRIVATE_KEY!;
 
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse,
+) {
+  try {
+    const ts = new Date().getTime();
 
-const getMarvelData = async () => {
-  const ts = new Date().getTime();
+    const hash = md5(ts + privateKey + publicKey);
+    const queryParams = `ts=${ts}&apikey=${publicKey}&hash=${hash}`;
 
-  const hash = md5(ts + privateKey + publicKey);
-  const queryParams = `ts=${ts}&apikey=${publicKey}&hash=${hash}`;
-  
-  const url = `https://gateway.marvel.com/v1/public/?${queryParams}`;
-  const response = await fetch(url);
-  const data = await response.json();
-  return data;
-};
+    const url = `https://gateway.marvel.com/v1/public/?${queryParams}`;
+    const response = await fetch(url);
+    const data = await response.json();
 
-export { getMarvelData };
+    return res.status(200).json({ data });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "failed to load data" });
+  }
+}
 
 // example call:
 //https://gateway.marvel.com/v1/public/characters?apikey=b74403139e05f58847a7da8cfa1bfc9c

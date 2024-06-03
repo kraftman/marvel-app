@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
-import { getMarvelData } from '../lib/marvel';
-import Link from 'next/link';
-import { Container, List, ListItem, ListItemText } from '@mui/material';
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { getCharacters } from "./actions/characterActions";
+import { Container, List, ListItem, ListItemText } from "@mui/material";
 
-const Home = ({ characters}) => {
-  
-
+const Home = async () => {
+  let characters = await getCharacters();
+  console.log("characters", characters);
   return (
     <Container>
       <h1>Marvel Characters</h1>
