@@ -4,7 +4,9 @@ import { generateApiKey } from './utils';
 
 const MARVEL_URL = 'https://gateway.marvel.com/v1/public';
 
-export async function getCharacters(offset, limit) {
+import { Character } from '../../types/character';
+
+export async function getCharacters(offset: number, limit: number) {
   try {
     const ts = new Date().getTime();
     const publicKey = process.env.NEXT_PUBLIC_MARVEL_PUBLIC_KEY!;
@@ -31,7 +33,7 @@ export async function getCharacters(offset, limit) {
   }
 }
 
-export async function getCharacterById(id: string) {
+export async function getCharacterById(id: string): Promise<Character> {
   try {
     const ts = new Date().getTime();
     const publicKey = process.env.NEXT_PUBLIC_MARVEL_PUBLIC_KEY!;
@@ -48,6 +50,7 @@ export async function getCharacterById(id: string) {
   } catch (error) {
     //eslint-disable-next-line
     console.log(error);
-    return {};
+    // deal with this correcly in the future
+    throw error;
   }
 }

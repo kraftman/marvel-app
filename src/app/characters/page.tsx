@@ -5,6 +5,8 @@ import { CharacterRow } from '../../components/CharacterRow';
 import { getCharacters } from '../actions/characterActions';
 import { Pagination } from '../../components/Pagination';
 
+import { Character } from '../../types/character';
+
 const Home = async ({ searchParams }) => {
   const charsPerPage = 20;
   const currentPage = Number(searchParams?.page) || 1;
@@ -21,7 +23,7 @@ const Home = async ({ searchParams }) => {
         Marvel Characters
       </Typography>
       <List>
-        {characters.map((character) => (
+        {characters.map((character: Character) => (
           <CharacterRow key={character.id} character={character} />
         ))}
       </List>
