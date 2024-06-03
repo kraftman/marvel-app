@@ -20,6 +20,7 @@ export async function getCharacters(offset, limit) {
     const url = `https://gateway.marvel.com/v1/public/characters?${queryParams}`;
     const response = await fetch(url);
     const data = await response.json();
+    console.log('data', data);
 
     return data;
   } catch (error) {

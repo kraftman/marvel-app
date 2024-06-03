@@ -47,6 +47,7 @@
     "jest": "^29.7.0",
     "jest-fetch-mock": "^3.0.3",
     "lint-staged": "^15.2.5",
+    "msw-storybook-addon": "^2.0.2",
     "prettier": "^3.3.0",
     "storybook": "^8.1.5",
     "ts-jest": "^29.1.4",
@@ -62,5 +63,10 @@
       "prettier --write"
     ]
   },
-  "packageManager": "yarn@4.2.2+sha512.c44e283c54e02de9d1da8687025b030078c1b9648d2895a65aab8e64225bfb7becba87e1809fc0b4b6778bbd47a1e2ab6ac647de4c5e383a53a7c17db6c3ff4b"
+  "packageManager": "yarn@4.2.2+sha512.c44e283c54e02de9d1da8687025b030078c1b9648d2895a65aab8e64225bfb7becba87e1809fc0b4b6778bbd47a1e2ab6ac647de4c5e383a53a7c17db6c3ff4b",
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
+  }
 }
