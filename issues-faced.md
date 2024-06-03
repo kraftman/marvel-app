@@ -1,1 +1,1 @@
-- nextjs changed the way they handle api routes in 14, needed to reformat to get it working
+- nextjs changed the way they handle api routes in 14, needed to learn server components/actions
