@@ -182,6 +182,9 @@ const config: Config = {
   //   "/node_modules/",
   //   "\\.pnp\\.[^\\/]+$"
   // ],
+  transform: {
+    '^.+\\.(js|jsx|ts|tsx)$': ['babel-jest', { configFile: './jest.babel.config.js' }],
+  },
 
   // An array of regexp pattern strings that are matched against all modules before the module loader will automatically return a mock for them
   // unmockedModulePathPatterns: undefined,

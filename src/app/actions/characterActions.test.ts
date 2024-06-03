@@ -40,7 +40,7 @@ describe('getCharacters', () => {
       `https://gateway.marvel.com/v1/public/characters?ts=${mockTimestamp}&apikey=${mockPublicKey}&hash=${mockHash}`,
     );
     expect(md5).toHaveBeenCalledWith(`${mockTimestamp}${mockPrivateKey}${mockPublicKey}`);
-    expect(result).toEqual(mockResponse.data.results);
+    expect(result).toEqual(mockResponse);
   });
 
   it('should handle fetch errors', async () => {
