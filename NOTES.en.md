@@ -2,7 +2,6 @@
 
 - Create a small web application using the Marvel API to display a list of characters and their details.
 - Show capabilities in React, TypeScript, and testing.
-- Use Storybook to document components.
 
 Functional requirements:
 
