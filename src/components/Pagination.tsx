@@ -5,7 +5,7 @@ import { Pagination as MUIPagination } from '@mui/material';
 export const Pagination = ({ numPages, currentPage }) => {
   const router = useRouter();
   const handlePageChange = (event, value) => {
-    router.push(`/?page=${value}`);
+    router.push(`?page=${value}`);
   };
 
   return (
