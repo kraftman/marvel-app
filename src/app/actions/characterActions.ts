@@ -1,14 +1,14 @@
 'use server';
-import md5 from 'md5';
+
+import { generateApiKey } from './utils';
 
 export async function getCharacters(offset, limit) {
-  const publicKey = process.env.NEXT_PUBLIC_MARVEL_PUBLIC_KEY!;
-  const privateKey = process.env.NEXT_PUBLIC_MARVEL_PRIVATE_KEY!;
-
   try {
     const ts = new Date().getTime();
+    const publicKey = process.env.NEXT_PUBLIC_MARVEL_PUBLIC_KEY!;
+    const privateKey = process.env.NEXT_PUBLIC_MARVEL_PRIVATE_KEY!;
 
-    const hash = md5(ts + privateKey + publicKey);
+    const hash = generateApiKey(ts, publicKey, privateKey);
     let queryParams = `ts=${ts}&apikey=${publicKey}&hash=${hash}`;
     if (offset) {
       queryParams += `&offset=${offset}`;

@@ -1,26 +1,23 @@
 import { getCharacters } from './characterActions';
 import { enableFetchMocks } from 'jest-fetch-mock';
-import md5 from 'md5';
 
 enableFetchMocks();
-
-jest.mock('md5');
 
 describe('getCharacters', () => {
   const mockPublicKey = 'mockPublicKey';
   const mockPrivateKey = 'mockPrivateKey';
-  let date;
+  let date: Date;
 
   beforeAll(() => {
     process.env.NEXT_PUBLIC_MARVEL_PUBLIC_KEY = mockPublicKey;
     process.env.NEXT_PUBLIC_MARVEL_PRIVATE_KEY = mockPrivateKey;
-    date = new Date();
+    date = new Date('December 17, 2024 03:24:00');
     jest.useFakeTimers().setSystemTime(date);
   });
 
   it('should fetch and return character data', async () => {
     const mockTimestamp = date.getTime();
-    const mockHash = 'mockHash';
+    const mockHash = 'f8f085ea2249d024d9f6c59486e9cd95';
     const mockResponse = {
       data: {
         results: [
@@ -30,16 +27,14 @@ describe('getCharacters', () => {
       },
     };
 
-    md5.mockReturnValue(mockHash);
-
-    fetch.mockResponseOnce(JSON.stringify(mockResponse));
+    fetchMock.mockResponseOnce(JSON.stringify(mockResponse));
 
     const result = await getCharacters();
 
-    expect(fetch).toHaveBeenCalledWith(
+    expect(fetchMock).toHaveBeenCalledWith(
       `https://gateway.marvel.com/v1/public/characters?ts=${mockTimestamp}&apikey=${mockPublicKey}&hash=${mockHash}`,
     );
-    expect(md5).toHaveBeenCalledWith(`${mockTimestamp}${mockPrivateKey}${mockPublicKey}`);
+
     expect(result).toEqual(mockResponse);
   });
 
