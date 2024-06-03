@@ -1,9 +1,10 @@
-"use server";
-import md5 from "md5";
-const publicKey = process.env.NEXT_PUBLIC_MARVEL_PUBLIC_KEY!;
-const privateKey = process.env.NEXT_PUBLIC_MARVEL_PRIVATE_KEY!;
+'use server';
+import md5 from 'md5';
 
 export async function getCharacters() {
+  const publicKey = process.env.NEXT_PUBLIC_MARVEL_PUBLIC_KEY!;
+  const privateKey = process.env.NEXT_PUBLIC_MARVEL_PRIVATE_KEY!;
+
   try {
     const ts = new Date().getTime();
 
@@ -13,7 +14,7 @@ export async function getCharacters() {
     const url = `https://gateway.marvel.com/v1/public/characters?${queryParams}`;
     const response = await fetch(url);
     const data = await response.json();
-    console.log("data", data.data.results);
+    console.log('data', data.data.results);
 
     return data.data.results;
   } catch (error) {

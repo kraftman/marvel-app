@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
-import Link from "next/link";
-import { getCharacters } from "./actions/characterActions";
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import {
   Container,
   List,
@@ -9,7 +8,9 @@ import {
   ListItemAvatar,
   Avatar,
   Typography,
-} from "@mui/material";
+} from '@mui/material';
+import { CharacterRow } from '../components/CharacterRow';
+import { getCharacters } from './actions/characterActions';
 
 const Home = async () => {
   let characters = await getCharacters();
@@ -20,17 +21,7 @@ const Home = async () => {
       </Typography>
       <List>
         {characters.map((character) => (
-          <ListItem key={character.id}>
-            <ListItemAvatar>
-              <Avatar
-                alt={character.name}
-                src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
-              />
-            </ListItemAvatar>
-            <Link href={`/character/${character.id}`} passHref>
-              <ListItemText primary={character.name} />
-            </Link>
-          </ListItem>
+          <CharacterRow key={character.id} character={character} />
         ))}
       </List>
     </Container>
