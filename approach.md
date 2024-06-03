@@ -4,6 +4,6 @@
 
 3 Test it - jest, react-testing-library, storybook :white_check_mark:
 
-4 Document it - storybook, mdx
+4 Document it - storybook, mdx :white_check_mark:
 
-5 Extras - caching? SSR? CI/CD? pagination? search?
+5 Extras - caching? SSR? CI/CD? pagination? search? :white_check_mark:
