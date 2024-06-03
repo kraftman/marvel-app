@@ -2,6 +2,8 @@
 
 import { generateApiKey } from './utils';
 
+const MARVEL_URL = 'https://gateway.marvel.com/v1/public';
+
 export async function getCharacters(offset, limit) {
   try {
     const ts = new Date().getTime();
@@ -17,13 +19,13 @@ export async function getCharacters(offset, limit) {
       queryParams += `&limit=${limit}`;
     }
 
-    const url = `https://gateway.marvel.com/v1/public/characters?${queryParams}`;
-    const response = await fetch(url);
+    const url = `${MARVEL_URL}/characters?${queryParams}`;
+    const response = await fetch(url, { cache: 'force-cache' });
     const data = await response.json();
-    console.log('data', data);
 
     return data;
   } catch (error) {
+    //eslint-disable-next-line
     console.log(error);
     return {};
   }
@@ -32,16 +34,19 @@ export async function getCharacters(offset, limit) {
 export async function getCharacterById(id: string) {
   try {
     const ts = new Date().getTime();
+    const publicKey = process.env.NEXT_PUBLIC_MARVEL_PUBLIC_KEY!;
+    const privateKey = process.env.NEXT_PUBLIC_MARVEL_PRIVATE_KEY!;
 
-    const hash = md5(ts + privateKey + publicKey);
+    const hash = generateApiKey(ts, publicKey, privateKey);
     let queryParams = `ts=${ts}&apikey=${publicKey}&hash=${hash}`;
 
-    const url = `https://gateway.marvel.com/v1/public/characters/${id}?${queryParams}`;
-    const response = await fetch(url);
+    const url = `${MARVEL_URL}/characters/${id}?${queryParams}`;
+    const response = await fetch(url, { cache: 'force-cache' });
     const data = await response.json();
 
     return data.data.results.length > 0 ? data.data.results[0] : {};
   } catch (error) {
+    //eslint-disable-next-line
     console.log(error);
     return {};
   }

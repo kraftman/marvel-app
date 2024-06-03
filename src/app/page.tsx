@@ -1,33 +1,17 @@
-import { useEffect, useState } from 'react';
-import Link from 'next/link';
-import { Container, List, Typography } from '@mui/material';
-import { CharacterRow } from '../components/CharacterRow';
-import { getCharacters } from './actions/characterActions';
-import { Pagination } from '../components/Pagination';
+// pages/index.js
 
-const Home = async ({ searchParams }) => {
-  const charsPerPage = 20;
-  const currentPage = Number(searchParams?.page) || 1;
+import { Typography, Link, Container } from '@mui/material';
 
-  const offset = (currentPage - 1) * charsPerPage;
-  const response = await getCharacters(offset, charsPerPage);
-  const characters = response.data.results;
-  const totalCharacters = response.data.total;
-  const numPages = Math.ceil(totalCharacters / charsPerPage);
-
+export default function WelcomePage() {
   return (
-    <Container>
-      <Typography variant="h4" gutterBottom>
-        Marvel Characters
+    <div>
+      <Typography variant="h3" component="h1" gutterBottom>
+        Welcome to the Marvel App!
       </Typography>
-      <List>
-        {characters.map((character) => (
-          <CharacterRow key={character.id} character={character} />
-        ))}
-      </List>
-      <Pagination numPages={numPages} currentPage={currentPage} />
-    </Container>
+      <Typography variant="h6">
+        Navigate to <Link href="/characters">characters</Link> to see a full list of Marvel
+        characters.
+      </Typography>
+    </div>
   );
-};
-
-export default Home;
+}

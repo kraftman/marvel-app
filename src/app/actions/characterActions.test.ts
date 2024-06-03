@@ -33,6 +33,7 @@ describe('getCharacters', () => {
 
     expect(fetchMock).toHaveBeenCalledWith(
       `https://gateway.marvel.com/v1/public/characters?ts=${mockTimestamp}&apikey=${mockPublicKey}&hash=${mockHash}`,
+      { cache: 'force-cache' },
     );
 
     expect(result).toEqual(mockResponse);
