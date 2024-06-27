@@ -1,6 +1,7 @@
 import React from 'react';
 import { Meta } from '@storybook/react';
 import { CharacterDetail } from './CharacterDetail';
+import { userEvent, within, expect, waitFor } from '@storybook/test';
 
 const mockData = [
   {
@@ -25,4 +26,20 @@ export const CharacterDetailStories = {
   },
   parameters: {},
   loaders: [],
+};
+
+export const CharacterDetailStoriesTest = {
+  render: () => {
+    return <CharacterDetail character={mockData[0]} />;
+  },
+  parameters: {},
+  loaders: [],
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    // check for an image the name, and a description:
+    // const image = canvas.getByAltText('Spiderman');
+    // expect(image).toBeVisible();
+    const title = canvas.getByText('Spiderman');
+    expect(title).toHaveTextContent('Spiderman');
+  },
 };
